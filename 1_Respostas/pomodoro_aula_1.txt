@@ -1,0 +1,25 @@
+pomodoro aula 1
+Josué Bonfim - 160032598
+
+1. O que são sistemas embarcados?
+	São sistemas microprocessados no qual o mesmo é totalmente dedicado ao propósito.
+
+2. O que são sistemas microprocessados?
+	São sistemas que necessitam de microprocessadores para a realização de cálculos e 
+	controles específicos para o uso. Eles podem também substituir sistemas que 
+	demandariam muito mais componentes e resumem o tamanho do produto.
+
+3. Apresente aplicações de sistemas embarcados:
+	a. Para a industria automotiva
+		Para o controle da sistema de ABS, airbag, injeção eletrônica, controle de tração, 
+		controle de estabilidade, avanço de ignição, controle do som automotivo, entre
+		outras
+
+	b. Para automação industrial
+		Para o controle dos braços mecânicos, controle de temperatura, de pressão,
+		de 
+
+
+4. Cite arquiteturas possíveis e as diferenças entre elas.
+
+5. Porque usamos o MPS430 na disciplina ao invés de outro microcontrolador? 
