@@ -21,5 +21,10 @@ Josué Bonfim - 160032598
 
 
 4. Cite arquiteturas possíveis e as diferenças entre elas.
-
+	Arquitetura Harvard e von Neumann. Na arquitetura Harvard e memoria RAM e ROM estão
+	separadas fisicamente. Permite a leitura em paralelo da memoria volátil e não volátil.
+	Na von Neumann eslas estão confinadas no mesmo espaço físico. É mais simples e menos 
+	eficiente que a arquitetura Harvard.
 5. Porque usamos o MPS430 na disciplina ao invés de outro microcontrolador? 
+	Por causa da capacidade de processamento do chip e da integração entre 
+	Assembly e C.
