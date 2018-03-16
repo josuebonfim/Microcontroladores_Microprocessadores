@@ -50,14 +50,13 @@ add.w R4, R4
 
 (b) g *= 3;
 mov.w R5, R11
-add.w R5, R11
+add.w R5, R5
 add.w R5, R11
 
 (c) h *= 4;
-mov.w R6, R11
-add.w R6, R11
-add.w R6, R11
-add.w R6, R11
+add.w R6, R6
+add.w R6, R6
+
 
 (d) A[2] = A[1] + A[0];
 mov.w 2(R9), R11
@@ -67,10 +66,8 @@ mov.w R11, 4(R9)
 
 (e) A[3] = 2*f - 4*h;
 add.w R4, R4
-mov.w R6, R11
-add.w R6, R11
-add.w R6, R11
-add.w R6, R11
+add.w R6, R6
+add.w R6, R6
 sub.w R4, R6
 mov.w R4, 8(R9)
 
