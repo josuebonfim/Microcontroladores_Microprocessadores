@@ -6,26 +6,32 @@ do MSP430 se encontram ao final deste texto.
 1. (a) Escreva uma função em C que calcule a raiz quadrada x de uma variável S do tipo float, utilizando o seguinte 
 algoritmo: após n+1 iterações, a raiz quadrada de S é dada por
 
-x(n+1) = (x(n) + S/x(n))/2
+#include "stdlib.h"
+#include "stdio.h"
 
-O protótipo da função é:
+unsigned int raiz_quadrada(unsigned int s);
 
-unsigned int Raiz_Quadrada(unsigned int S);
-
-unsigned int raiz_quadrada (unsigned int s)
-{
-	unsigned int x = (s + 1)/2, n;
-	if (s < 2)
-	{
-		return s;
-	}
-	for (int n = 0; n < 10000; ++i)
-	{
-		x = (x + s/x)/2
-	}
-	return x
-
+int main(int argc, char const *argv[]) {
+  unsigned int s, x;
+  scanf("%d",&s );
+  x = raiz_quadrada(s);
+  printf("raiz de %d = %d\n", s, x );
+  return 0;
 }
+
+unsigned int raiz_quadrada(unsigned int s)
+{
+  unsigned int x = (s+1)/2, i;
+  if (s < 2) {
+    return s;
+  }else
+  {
+    for (i = 0; i < 1000; i++)
+    x = (x + s/x)/2;
+  }
+  return x;
+}
+
 
 (b) Escreva a sub-rotina equivalente na linguagem Assembly do MSP430. A variável S é fornecida pelo registrador R15, 
  e a raiz quadrada de S (ou seja, a variável x) é fornecida pelo registrador R15 também.
@@ -34,38 +40,35 @@ unsigned int raiz_quadrada (unsigned int s)
 
 int Potencia(int x, int N);
 
-int Potencia(int x, int N)
-{
-	int pot = 1, ;
-	int i;
-	if (N == 0)
-	{
-		if (x == 0)
-		{
-			return 0;
-		}
-		return pot;
-	}else
-	{
-		if (x == 0)
-		{
-			return 0;
-		}else
-		{
-			if (x == 1)
-			{
-				return pot;
-			}else
-			{
-				for(i = 0; i < N, i++)
-				{
-					pot = x * pot;
-				}
-				return pot;
-			}
-		}
-	}
+#include "stdlib.h"
+#include "stdio.h"
+
+int Potencia(int x, int n);
+
+int main(int argc, char const *argv[]) {
+  int x, n, pot;
+  scanf("%d", &x);
+  scanf("%d", &n);
+  pot = Potencia(x, n);
+  printf("%d ^ %d = %d\n", x, n, pot );
 }
+
+int Potencia (int x, int n)
+{
+  int pot = x;
+  if (n == 0)
+  {
+    return 1;
+  }else
+  {
+    while (n > 1) {
+      x = x*pot;
+      n-- ;
+    }
+  }
+  return x;
+}
+
 (b) Escreva a sub-rotina equivalente na linguagem Assembly do MSP430. x e n são fornecidos através dos registradores R15 
 e R14, respectivamente, e a saída deverá ser fornecida no registrador R15.
 
@@ -81,6 +84,40 @@ ser fornecida através do registrador R15.
 for primo, e 0, caso contrário. Siga o seguinte protótipo:
 
 int Primalidade(unsigned int x);
+#include "stdlib.h"
+#include "stdio.h"
+#include "math.h"
+
+int Primo (int x);
+
+int main(int argc, char const *argv[]) {
+  int x, primo;
+  scanf("%d", &x);
+  primo = Primo(x);
+  if (primo) {
+    printf("%d eh primo\n", x);
+  }else
+  {
+    printf("%d nao eh primo\n", x);
+  }
+}
+
+int Primo (int x)
+{
+  int limite, i;
+  limite = (int)sqrt(x);
+
+  for ( i = 0; i < limite; i++) {
+    if (x % i == 0) {
+      return 0;
+    }
+    else
+    {
+      return 1;
+    }
+  }
+}
+
 
 (b) Escreva a sub-rotina equivalente na linguagem Assembly do MSP430. A variável de entrada é fornecida pelo registrador
 R15,e o valor de saída também.
@@ -90,11 +127,60 @@ n for par, n!! = 246...n. Por exemplo, 9!! = 13579 = 945 e 10!! = 2468*10 = 3840
 da função é:
 
 unsigned long long DuploFatorial(unsigned long long n);
+#include "stdlib.h"
+#include "stdio.h"
+#include "math.h"
+
+unsigned long long duploFatorial (unsigned long long n);
+
+int main(int argc, char const *argv[]) {
+  unsigned long long n, duploFac;
+  scanf("%llu", &n);
+  duploFac = duploFatorial(n);
+  printf("%llu\n", duploFac);
+}
+
+unsigned long long duploFatorial (unsigned long long n)
+{
+  int controle;
+  int x, i = 1;
+  if (n == 0)
+  {
+    return 1;
+  }else
+  {
+    if (n%2 == 0)
+    {
+      controle = n/2;
+      x = 2;
+      while(controle > 0)
+      {
+        i *= x;
+        x += 2;
+        controle-- ;
+      }
+    }else
+    {
+      controle = (n + 1)/2;
+      x = 1;
+      while(controle > 0)
+      {
+        i *= x;
+        x += 2;
+        controle-- ;
+      }
+    }
+  }
+  return i;
+}
+
 
 7. (a) Escreva uma função em C que calcula a função exponencial utilizando a série de Taylor da mesma. Considere o cálculo 
 até o termo n = 20. O protótipo da função é double ExpTaylor(double x); (b) Escreva a sub-rotina equivalente na linguagem 
 Assembly do MSP430, mas considere que os valores de entrada e de saída são inteiros de 16 bits. A variável de entrada é 
 fornecida pelo registrador R15, e o valor de saída também.
+
+
 
 8. Escreva uma sub-rotina na linguagem Assembly do MSP430 que indica se um vetor esta ordenado de forma decrescente. Por 
 exemplo: [5 4 3 2 1] e [90 23 20 10] estão ordenados de forma decrescente. [1 2 3 4 5] e [1 2 3 2] não estão. O primeiro 
