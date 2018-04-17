@@ -430,5 +430,19 @@ palindromo:     push R6
                 mov.w R6, R12 
                 dec R12         ;r12 = tamanho/2 - 1
                 add.w R15, R12  ;r12 = &a[tamanho/2 - 1] 
-for_loop:       
+for_loop:       cmp R13, R6
+		jge fim
+		cmp 0(R15), 0(R12)
+		jne for_fim
+		add.w #2, R15
+		sub.w #2, R12
+		inc.w R13
+		jmp for_loop
+for_fim:	mov.w #1, R15
+		ret
+fim:		clr R15
+		ret
+		
+
+		
                 
