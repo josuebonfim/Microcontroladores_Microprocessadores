@@ -64,17 +64,54 @@ void blink_led()
 }
 
 5.Reescreva o código da questão 2 usando a função da questão 4.
-void main (void)
+#include <msp430.h>
+#define LED1 BIT0
+#define LED2 BIT1
+#define LEDS (LED1|LED2)
+#define BTN  BIT3
+
+void pisca();
+
+void main(void)
 {
-  WDTCTL = WDTPW | WDTHOLD;
-  P1DIR = BIT6 + BIT0;
-  P1OUT = BIT6 + BIT0;
-  
-  for (;;)
-  {
-    blink_led();
-    for (i = 0; i < 0x6000; i++);
-  }
+    WDTCTL = WDTPW | WDTHOLD;
+    PM5CTL0 &= ~LOCKLPM5;
+    P1OUT |= LEDS;
+    P1DIR |= LEDS;
+    P2DIR &= ~BTN;
+    P2REN |= BTN;
+    P2OUT |= BTN;
+
+    while(1)
+    {
+		pisca();
+    }
+
+}
+
+void pisca(){
+  	  unsigned volatile int counter;
+      P1OUT ^= LEDS;
+      P2OUT ^= BTN;
+
+		  for(counter = 0; counter < 30000; counter++){}
+      P1OUT ^= LEDS;
+      P2OUT ^= BTN;
+
+		  for(counter = 0; counter < 30000; counter++){}
+}
+
+void pisca(){
+    unsigned volatile int counter;
+    P1OUT ^= LEDS;
+    P2OUT ^= BTN;
+
+    for(counter = 0; counter < 30000; counter++){}
+
+    P1OUT ^= LEDS;
+    P2OUT ^= BTN;
+
+    for(counter = 0; counter < 30000; counter++){}
 }
 
 6.Reescreva o código da questão 3 usando a função da questão 4.
@@ -83,15 +120,44 @@ void main (void)
 #define LED2 BIT6
 #define BTN BIT2
 
-void main (void)
+#include <msp430.h>
+#define LED1 BIT0
+#define LED2 BIT1
+#define LEDS (LED1|LED2)
+#define BTN  BIT3
+
+void pisca();
+
+void main(void)
 {
-  WDTCTL = WDTPW | WDTHOLD;
-  P1DIR = BIT6 + BIT0;
-  P1OUT = BIT6 + BIT0;
-  
-  for (;;)
-  {
-    if (P1IN & BTN == 0)
-    blink_led();
-  }
+    WDTCTL = WDTPW | WDTHOLD;
+    PM5CTL0 &= ~LOCKLPM5;
+    P1OUT |= LEDS;
+    P1DIR |= LEDS;
+    P2DIR &= ~BTN;
+    P2REN |= BTN;
+    P2OUT |= BTN;
+
+    while(1)
+    {
+        if((P2IN & BTN)==0){
+         pisca();
+         pisca();
+        }else
+            P1OUT &= ~LEDS;
+    }
+
+}
+
+void pisca(){
+    unsigned volatile int counter;
+    P1OUT ^= LEDS;
+    P2OUT ^= BTN;
+
+    for(counter = 0; counter < 30000; counter++){}
+
+    P1OUT ^= LEDS;
+    P2OUT ^= BTN;
+
+    for(counter = 0; counter < 30000; counter++){}
 }
