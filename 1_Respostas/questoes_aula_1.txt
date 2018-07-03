@@ -2,7 +2,7 @@ pomodoro aula 1
 Josué Bonfim - 160032598
 
 1. O que são sistemas embarcados?
-	São sistemas microprocessados no qual o mesmo é totalmente dedicado ao propósito.
+	São computadores construídos para o único propósito da sua aplicação, ao invés de prover um sistema computacional generalizado.		Essa definição independe da sua construção, pode abranger desde lógicas combinacionais e processadores de 8-bits, até 			processadores de 64-bits multi-cores e ASICs.
 
 2. O que são sistemas microprocessados?
 	São sistemas que necessitam de microprocessadores para a realização de cálculos e 
