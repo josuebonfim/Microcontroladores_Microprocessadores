@@ -1,12 +1,12 @@
-	1. Quais as diferenças entre os barramentos de dados e de endereços?
-		O barramento de dados realiza a comunicação entre a memória de dados e da CPU. Ele permite que haja tanto leitura quanto escrita
-		na memória de dados. Já o barramento de endereço permite apenas a escrita dos endereços na memória RAM.
-		
-	2. Quais são as diferenças entre as memórias RAM e ROM?
-		Memória RAM é a memória volátil. Ela foi projetada para uso de dados que serão descartados futuramente. A memória ROM é a 
-		memória estática. Foi projetada para o uso de dados que necessitam de armazenamento permanente.
-		
-	3. Considere o código abaixo:
+1. Quais as diferenças entre os barramentos de dados e de endereços?
+O barramento de dados realiza a comunicação entre a memória de dados e da CPU. Ele permite que haja tanto leitura quanto escrita
+na memória de dados. Já o barramento de endereço permite apenas a escrita dos endereços na memória RAM.
+
+2. Quais são as diferenças entre as memórias RAM e ROM?
+	Memória RAM é a memória volátil. Ela foi projetada para uso de dados que serão descartados futuramente. A memória ROM é a 
+	memória estática. Foi projetada para o uso de dados que necessitam de armazenamento permanente.
+
+3. Considere o código abaixo:
 
 #include <stdio.h>
 int main(void)
@@ -20,33 +20,33 @@ int main(void)
 		printf("%d eh par.\n");
 	return 0;
 }
-	Para este código, responda: 
-		(a) A variável i é armazenada na memória RAM ou ROM? Por quê? 
-			Na memória RAM, pois após o uso do programa, a variável será descartada.
-			
-		(b) O programa compilado a partir deste código é armazenado na memória RAM ou ROM? Por quê?
-			Memória ROM, pois o programa poderá ser usado novamente, logo, não há necessidade de descarte.
+Para este código, responda: 
+	(a) A variável i é armazenada na memória RAM ou ROM? Por quê? 
+		Na memória RAM, pois após o uso do programa, a variável será descartada.
 
-	4. Quais são as diferenças, vantagens e desvantagens das arquiteturas Harvard e Von Neumann?
-		A arquitetura Harvard é aquela na qual a memória RAM e memória ROM estão separadas fisicamente. Logo é necessário um 
-		barramento
-		de dados e de memória para cada uma, demandando um tamanho maior e maior consumo de energia, porém é mais rápida. 
-		A arquitetura Von Neumann é aquela que possui a ROM e RAM no mesmo espaço físico, proporcionando a redução do tamanho e 
-		menor uso de energia.
-		
-	5. Considere a variável inteira i, armazenando o valor 0x8051ABCD. Se i é armazenada na memória a partir do endereço 0x0200,
-	como ficam este byte e os seguintes, considerando que a memória é: 
-	
-		(a) Little-endian; 
-			0x0200 - ABCD
-			0x0201 - 8051
+	(b) O programa compilado a partir deste código é armazenado na memória RAM ou ROM? Por quê?
+		Memória ROM, pois o programa poderá ser usado novamente, logo, não há necessidade de descarte.
 
-		(b) Big-endian.
-			0x0200 - 8051
-			0x0201 - ABCD
+4. Quais são as diferenças, vantagens e desvantagens das arquiteturas Harvard e Von Neumann?
+	A arquitetura Harvard é aquela na qual a memória RAM e memória ROM estão separadas fisicamente. Logo é necessário um 
+	barramento
+	de dados e de memória para cada uma, demandando um tamanho maior e maior consumo de energia, porém é mais rápida. 
+	A arquitetura Von Neumann é aquela que possui a ROM e RAM no mesmo espaço físico, proporcionando a redução do tamanho e 
+	menor uso de energia.
 
-	6. Sabendo que o processador do MSP430 tem registradores de 16 bits, como ele soma duas variáveis de 32 bits?
-		Seja X e Y duas variáveis de 32 bits. Sejam R4, R5, R6, R7, R8, R9 registradores de 16 bits. Podemos separar
-		X em X1, X2, X3, X4 como sendo X1 o menos byte menos significativo e X4 o byte mais significativo. Do mesmo jeito, 
-		podemos fazer com a variável Y. Guardamos X1 e X2 em R4 e X3 e X4 em R5. Guardamos também Y1 e Y2 em R6 e Y3 e Y4 em 
-		R7. Somamos o conteúdo de R4 com R6 e guardamos em R8. Somamos o conteúdo de R5 com R7 e armazenamos em R9.
+5. Considere a variável inteira i, armazenando o valor 0x8051ABCD. Se i é armazenada na memória a partir do endereço 0x0200,
+como ficam este byte e os seguintes, considerando que a memória é: 
+
+	(a) Little-endian; 
+		0x0200 - ABCD
+		0x0201 - 8051
+
+	(b) Big-endian.
+		0x0200 - 8051
+		0x0201 - ABCD
+
+6. Sabendo que o processador do MSP430 tem registradores de 16 bits, como ele soma duas variáveis de 32 bits?
+	Seja X e Y duas variáveis de 32 bits. Sejam R4, R5, R6, R7, R8, R9 registradores de 16 bits. Podemos separar
+	X em X1, X2, X3, X4 como sendo X1 o menos byte menos significativo e X4 o byte mais significativo. Do mesmo jeito, 
+	podemos fazer com a variável Y. Guardamos X1 e X2 em R4 e X3 e X4 em R5. Guardamos também Y1 e Y2 em R6 e Y3 e Y4 em 
+	R7. Somamos o conteúdo de R4 com R6 e guardamos em R8. Somamos o conteúdo de R5 com R7 e armazenamos em R9.
