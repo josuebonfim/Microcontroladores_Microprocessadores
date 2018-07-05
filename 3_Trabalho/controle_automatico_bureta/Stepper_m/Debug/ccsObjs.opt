@@ -1,0 +1,1 @@
+"./hd44780.obj" "./ishan.obj" "./main.obj" "../lnk_msp430g2553.cmd" -llibc.a 

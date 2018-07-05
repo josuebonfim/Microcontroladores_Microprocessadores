@@ -1,0 +1,39 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Programa do Stepper Motor
+
+% O programa primeiramente define as saídas da porta P1 como:
+% \begin{itemize}
+% 	\item P1.0 para a bobina 1
+% 	\item P1.1 para a bobina 2
+% 	\item P1.2 para a bobina 3
+% 	\item P1.3 para o botão da MSP430
+% 	\item P1.4 para a bobina 4
+% \end{itemize}
+
+% Como variáveis globais foram definidos o inteiro sem sinal i = 0 e um inteiro direção = 0;
+
+% O programa define também uma variável para todas as bobinas, chamada COILS. 
+
+% O clock do sistema é definido em 1MHz. O programa define P1.3 como entrada e as demais ports de P1 como saídas. Também é habilidado o resistor de pull-up o botão. O programa também utiliza de interrupção do botão.  
+
+% O timer A é configurado utilizando o SMCLK dividido por 1 no modo up e que habilita interrupção do timerA. 
+
+% Na função da interrupção do timerA, a variável global i realiza o controle de qual bobina será energizada. Se i é zero, a bobina 1 é energizada, as outras bobinas não são e se a direção = 0, i = 7, senão i++. Se i = 7 as bobinas 1 e 4 são energizadas, enquanto as demais não são e se direção = 0, i é decrementado, senão i=0. Se i = 6 apenas a bobina 4 é energizada e se direção for = 0, i++, senão i--. Assim, seguindo a lógica de energizar a bobina n, no próximo passo, energiza a bobina n e a bobina n$\pm$1, até que n <= 1 A flag direção seleciona se a próxima bobina energizada será a bobina n-1 ou a bobina n+1.
+
+% Na função de interrupção do botão, se o botão é pressionado, a flag de direção é invertida, ou seja, se era 0, recebe 1, se era um recebe 0. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Progama do Cooler
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Programa do LDR
+
+% O programa define o bit1 para a entrada de referência do conversor AD e define o LED1 como o bit0 e o LED2 como o bit6. Existe também uma variável que seta os dois leds ao mesmo tempo, ou seja LEDS = (LED1|LED2).
+
+% Na função main, desabilitamos o watchdog timer e setamos o clock do sistema para 1MHz, ou seja, BCSCTL1 = CALBC1_1MHZ; e DCOCTL = CALDCO_1MHZ; Então os leds são setados para a porta P1 como saída. 
+
+% Para a configuração do ADC10, usaremos como a fonte de referência  $V^+ = V_{cc}$ e $V^- = V_{ss}$, usaremos também o 4 períodos de clock para fazer aproximações sucessivas com o conversor ligado o tempo todo. Usaremos para a fonte de conversão a porta P1.1. 	Selecionamos a entrada analógica A1, selecionamos a divisão de clock por 1, escolhemos o subsystem master clock como a fonte de clock, usamos a conversão única por canal único e toda vez que uma conversão é solicitada o bit referente ao início da conversão, ADC10SC será setado. 
+
+% Entramos então em um loop infinito, em que iniciamos uma conversão, esperamos a mesma ficar pronta e se a voltagem no LDR for menor que o threshold do ponto de viragem, o LED1 pisca, senão, ele não pisca.  
